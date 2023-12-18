@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Dashboard</h1>
+
+        <!-- Link to add a new post -->
+        <a href="{{ url_for('add_post') }}" class="btn btn-primary mt-3 mb-3">Add New Post</a>
+
+        <!-- Table of user's posts -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>
+                            <!-- Edit and Delete buttons -->
+                            <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">No posts to display.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
